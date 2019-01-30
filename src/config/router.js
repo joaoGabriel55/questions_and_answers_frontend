@@ -26,16 +26,6 @@ const routes = [
         component: AdminPages,
         meta: { requiresAdmin: true }
     }
-    // {
-    //     name: "articlesByCategory",
-    //     path: "/categories/:id/articles",
-    //     component: ArticlesByCategory
-    // },
-    // {
-    //     name: "articlesById",
-    //     path: "/articles/:id",
-    //     component: ArticlesById
-    // }
 ];
 
 const router = new VueRouter({

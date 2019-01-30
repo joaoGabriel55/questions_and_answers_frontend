@@ -124,8 +124,6 @@ export default {
             (this.mode = "save"), (this.user = {}), this.loadUsers();
         },
         save() {
-            // const method = this.user.id ? "put" : "post";
-
             if (this.user.password !== this.user.confirmPassword) {
                 this.$toasted.global.passwordNotMatch();
                 return;

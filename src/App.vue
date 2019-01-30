@@ -33,8 +33,6 @@ export default {
             const json = localStorage.getItem(userKey);
             const userData = JSON.parse(json) ? JSON.parse(json) : null;
 
-            // this.$store.commit("setUser", null, null);
-
             if (!userData) {
                 this.validatingToken = false;
                 this.$router.push({ name: "auth" });

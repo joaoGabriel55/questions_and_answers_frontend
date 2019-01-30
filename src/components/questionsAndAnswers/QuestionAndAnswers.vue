@@ -132,8 +132,6 @@ export default {
     },
     mounted() {
         this.getQuestions();
-        console.log(this.$store.state.user.user.id);
-        //    console.log(this.questions);
     }
 };
 </script>

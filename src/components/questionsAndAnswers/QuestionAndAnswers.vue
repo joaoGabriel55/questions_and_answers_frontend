@@ -24,9 +24,9 @@
                <div :id="isUserLogged ? `${question.questionId}-q` : `${question.questionId}-q-al`" class="answers" v-show="isHidden">
                     <hr>
                     <span><strong>Answers</strong></span>
-                    <b-card class="mt-2" v-for="answer in answers" :key="answer.answerId">
-                         <p class="card-text">{{answer.answerContent}}</p>
-                         <p class="content-answer"><span><strong>Author: </strong>{{answer.author}}</span></p>
+                    <b-card class="mt-2" v-for="ans in question.answerUserList" :key="ans.answerId">
+                         <p class="card-text">{{ans.answerContent}}</p>
+                         <p class="content-answer"><span><strong>Author: </strong>{{ans.author}}</span></p>
                     </b-card>
 
                     <div class="form-group mt-3">
@@ -68,9 +68,8 @@ export default {
         return {
             userIdLogged: this.$store.state.user.user.id,
             question: {},
-            questions: [],
             answer: {},
-            answers: [],
+            questions: [],
             page: 0,
             pageAnswers: 0,
             loadMore: true,
@@ -83,32 +82,18 @@ export default {
             if (content.style.display === "none") {
                 this.answers = [];
                 document.getElementById(elem).style.display = "";
-                this.getAnswers(idQuestion);
                 //  document.getElementById("31-btn").textContent = "Show answers"
             } else {
                 document.getElementById(elem).style.display = "none";
-                this.pageAnswers = 0;
-                this.answers = [];
             }
         },
         getQuestions() {
-            const url = `${baseApiURL}/questions?page=${
+            const url = `${baseApiURL}/questions/questionsanswers?page=${
                 this.page
             }&size=6&userId=${this.isUserLogged ? this.userIdLogged : "0"}`;
             axios.get(url).then(res => {
                 this.questions = this.questions.concat(res.data.data);
                 this.page++;
-                if (res.data.data.length === 0) this.loadMore = false;
-            });
-        },
-        getAnswers(idQuestion) {
-            const url = `${baseApiURL}/answers?page=${
-                this.pageAnswers
-            }&size=6&questionId=${idQuestion}`;
-            axios.get(url).then(res => {
-                this.answers = this.answers.concat(res.data.data);
-                console.log(this.answers);
-                this.pageAnswers++;
                 if (res.data.data.length === 0) this.loadMore = false;
             });
         },
